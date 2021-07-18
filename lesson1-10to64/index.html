@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .result {
+            width: 100px;
+            height: 100px;
+            font-size: 16px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="input">
+      <input class="origin" type="text" placeholder="请输入10进制数字"/>
+      <br>
+      <span>输出的64进制数字为：<span>
+      <span class="result"></span>
+    </div>
+    <script>
+      function string10to64(number) {
+        var chars =
+            "0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIGKLMNOPQRSTUVWXYZ-~".split(
+              ""
+            ),
+          radix = chars.length,
+          qutient = +number,
+          arr = [];
+        do {
+          mod = qutient % radix;
+          qutient = (qutient - mod) / radix;
+          arr.unshift(chars[mod]);
+        } while (qutient);
+        return arr.join("");
+      }
+      var origin = document.querySelector(".origin");
+      origin.addEventListener("input", function () {
+        if (origin.value !== "") {
+          var result = string10to64(origin.value);
+          console.log(result)
+          document.querySelector(".result").innerHTML = result;
+        }
+      });
+    </script>
+  </body>
+</html>
